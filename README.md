@@ -1,4 +1,6 @@
-This is an AI Bookshelf
+# **AI Bookshelf**
+
+Created for UMN Leetcode Club competition
 
 (INTRO AND WHAT IT DOES HERE)
 
