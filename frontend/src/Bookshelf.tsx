@@ -1,3 +1,16 @@
+// interface Book {
+//     id: number;
+//     title: string;
+//     filename: string;
+//     filetype: string;
+//     tags: string;
+//     added_on: string;
+// }
+
+// interface BookshelfProps {
+//     books: Book[];
+// }
+
 function Bookshelf() {
     return (
         <main className="flex flex-col">
