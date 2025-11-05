@@ -8,9 +8,9 @@ function App() {
 
   const fetchAPI = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/books");
+      const response = await axios.get("/api/books");
       setBooks(response.data);
-      console.log(response.data);
+      console.log("Fetched books: ", response.data);
     } catch (err) {
       console.error("Failed to fetch books:", err);
     }
@@ -23,17 +23,7 @@ function App() {
   return (
     <>
       <Header />
-      <Bookshelf />
-      {/* <div>
-        {array.map((book) => (
-          <div key={book.id}>
-            <h3>{book.title}</h3>
-            <p>File: {book.filename} ({book.filetype})</p>
-            <p>Tags: {book.tags}</p>
-            <p>Added: {book.added_on}</p>
-          </div>
-        ))}
-      </div> */}
+      <Bookshelf books={books} onUploadSuccess={fetchAPI} />
     </>
   );
 }

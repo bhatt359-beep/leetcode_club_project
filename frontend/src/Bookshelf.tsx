@@ -1,17 +1,21 @@
-// interface Book {
-//     id: number;
-//     title: string;
-//     filename: string;
-//     filetype: string;
-//     tags: string;
-//     added_on: string;
-// }
+import AddBookButton from "./AddBookButton";
+import { DeleteBookButton } from "./DeleteBookButton";
 
-// interface BookshelfProps {
-//     books: Book[];
-// }
+export interface Book {
+    id: number;
+    title: string;
+    filename: string;
+    filetype: string;
+    tags: string;
+    added_on: string;
+}
 
-function Bookshelf() {
+interface BookshelfProps {
+    books: Book[];
+    onUploadSuccess?: () => void;
+}
+
+export function Bookshelf({ books }: BookshelfProps) {
     return (
         <main className="flex flex-col">
             <div className="h-[60vh] w-screen p-15">
@@ -19,11 +23,30 @@ function Bookshelf() {
                     BOOKSHELF
                 </div>
             </div>
-            <button className="border rounded-lg p-1.5 w-30 h-15 hover:bg-violet-400 m-auto">
-                Add Book
-            </button>
-        </main>
 
+        <div className="flex flex-col gap-4 p-4">
+            {books.length === 0 ? (
+                <p className="text-center">No books found</p>
+            ) : (
+                books.map((book) => (
+                    <div key={book.id} className="border p-2 rounded">
+                        <div>
+                            <h3>Title: {book.title}</h3>
+                            <p>File: {book.filename} ({book.filetype})</p>
+                            <p>Tags: {book.tags}</p>
+                            <p>Added: {book.added_on}</p>
+                        </div>
+                        <DeleteBookButton bookId={book.id} onDeleted={() => {
+                            window.location.reload();
+                        }}/>
+                    </div>
+                ))
+            )}
+        </div>
+        <AddBookButton onUploadSuccess={() => {
+            window.location.reload();
+        }}/>
+        </main>
     );
 }
 
